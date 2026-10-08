@@ -1,0 +1,53 @@
+## Interface: 120005, 120007, 120100
+## Title: M+ Ledger
+## Notes: Mythic+/dungeon/raid tracking: kills, deaths, repairs, loot, and a Mythic+ stats dashboard.
+## Author: Yuki
+## Version: 0.1.300
+## IconTexture: Interface\Icons\Achievement_ChallengeMode_Gold
+## SavedVariables: MPlusLedgerDB, InstanceLedgerDB
+
+UI\PieChart.lua
+MPlusLedgerSkin\LedgerSkin.lua
+Core.lua
+UI\Overview.lua
+UI\ThemedTabs.lua
+UI\MenuPolish.lua
+UI\BrowserLayouts.lua
+UI\ChartLayouts.lua
+
+UI\NavigationPaging.lua
+
+UI\MenuIcons.lua
+
+# Loads after MenuIcons.lua now (was right after MenuPolish.lua) -- per user report 2026-10-02
+# ("this looks horrible and nothing like the mockup"): MenuIcons.lua's generic icon-decoration
+# pass runs on every button in Manage Runs regardless of load order, and "Create Run" is one of
+# its exact-match icons (an icon + re-centered label), which was clobbering the taller nav card
+# layout this file builds for that exact button EVERY time, since MockupLayouts.lua used to load
+# (and therefore run its positioning) BEFORE MenuIcons got a turn, not after. Moved here, after
+# MenuIcons.lua, so this file's positioning is what actually survives on screen -- it's "the
+# approved mockup layout," so it should have final say over anything it explicitly redesigns.
+# Deliberately still loads BEFORE BossPacingView.lua (unchanged position) so that file keeps its
+# own existing final say over RefreshBossPacingTabContent, which this file also wraps but isn't
+# trying to override.
+UI\MockupLayouts.lua
+
+UI\InstanceBrowserArt.lua
+
+UI\BossPacingView.lua
+
+UI\DungeonCatalogue.lua
+UI\AllRunsReference.lua
+
+UI\ThemeAssets.lua
+UI\ThemeManager.lua
+UI\TrackerExperience.lua
+UI\SettingsExperience.lua
+
+UI\ApplicantExperience.lua
+
+UI\PartyRatingExperience.lua
+
+UI\PacingTargets.lua
+
+UI\WelcomeExperience.lua
